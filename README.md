@@ -8,18 +8,32 @@ Arquitectura hexagonal (puertos y adaptadores) con DDD:
 
 ```
 com.company.prices
-  domain
-    model                 Price (record inmutable; reglas de vigencia y precedencia)
-    exception             PriceNotFoundException
-  application
-    port.input            GetApplicablePriceUseCase
-    port.output           LoadPricesPort
-    service               GetApplicablePriceService
-  infrastructure
-    adapter.input.rest          PriceController, GlobalExceptionHandler, dto, mapper
-    adapter.output.persistence  PriceJpaEntity, SpringDataPriceRepository,
-                                PricePersistenceAdapter, PricePersistenceMapper
-    configuration               BeanConfiguration, OpenApiConfiguration
+├── domain
+│   ├── model
+│   │   └── Price (record inmutable; reglas de vigencia y precedencia)
+│   └── exception
+│       └── PriceNotFoundException
+├── application
+│   ├── port.input
+│   │   └── GetApplicablePriceUseCase
+│   ├── port.output
+│   │   └── LoadPricesPort
+│   └── service
+│       └── GetApplicablePriceService
+└── infrastructure
+    ├── adapter.input.rest
+    │   ├── PriceController
+    │   ├── GlobalExceptionHandler
+    │   ├── dto
+    │   └── mapper
+    ├── adapter.output.persistence
+    │   ├── PriceJpaEntity
+    │   ├── SpringDataPriceRepository
+    │   ├── PricePersistenceAdapter
+    │   └── PricePersistenceMapper
+    └── configuration
+        ├── BeanConfiguration
+        └── OpenApiConfiguration
 ```
 
 `HexagonalArchitectureTest` (ArchUnit) verifica que dominio y aplicacion no dependen de Spring ni de infraestructura.
@@ -73,7 +87,7 @@ Respuesta 200:
 }
 ```
 
-Los errores (400, 404, 405, 500) siguen RFC 9457 (`application/problem+json`):
+Los errores (400, 404, 405, 500) devuelven un JSON con el detalle del problema (`application/problem+json`):
 
 ```json
 {
