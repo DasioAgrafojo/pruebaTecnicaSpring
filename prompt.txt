@@ -1,0 +1,460 @@
+Tengo que hacer esta tarea:
+Prueba técnica de desarrollo:
+ 
+Requisitos mínimos y obligatorios para la prueba:
+La prueba debe ser funcional, tiene que cubrir los puntos que se piden en la descripción. Se debe poder levantar el micro sin errores ni ajustes por parte del revisor.
+Definir los endpoints de la prueba siguiendo los estándares y buenas prácticas de APIs REST.
+Cubrir la implementación con tests unitarios y tests de integración (en el documento se lista un conjunto de tests de integración a implementar).
+Documentación: añadir al menos cierta documentación sobre la prueba y las instrucciones a seguir en el fichero readme.
+El código y su documentación debe estar en inglés, no mezclar idiomas. Para una mayor agilidad, si fuera necesario, la documentación del fichero readme.md se puede excluir y redactar en castellano.
+Añadir una colección de Postman (o cualquier otra alternativa) que permita importar las peticiones para invocar a los endpoints creados durante la prueba.
+Arquitectura Hexagonal con DDD.
+Añadir trazas de logs.
+Gestión de excepciones.
+
+
+texto adjunto: 
+
+En la base de datos de comercio electrónico de la compañía disponemos de la tabla PRICES que refleja el precio final (pvp) y la tarifa que aplica a un producto de una cadena entre unas fechas determinadas. A continuación se muestra un ejemplo de la tabla con los campos relevantes:
+ 
+PRICES
+-------
+ 
+BRAND_ID         START_DATE                                    END_DATE                        PRICE_LIST                   PRODUCT_ID  PRIORITY                 PRICE           CURR
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1         2020-06-14-00.00.00                        2020-12-31-23.59.59                        1                        35455                0                        35.50            EUR
+1         2020-06-14-15.00.00                        2020-06-14-18.30.00                        2                        35455                1                        25.45            EUR
+1         2020-06-15-00.00.00                        2020-06-15-11.00.00                        3                        35455                1                        30.50            EUR
+1         2020-06-15-16.00.00                        2020-12-31-23.59.59                        4                        35455                1                        38.95            EUR
+ 
+Campos: 
+ 
+BRAND_ID: foreign key de la cadena del grupo (1 = ZARA).
+START_DATE , END_DATE: rango de fechas en el que aplica el precio tarifa indicado.
+PRICE_LIST: Identificador de la tarifa de precios aplicable.
+PRODUCT_ID: Identificador código de producto.
+PRIORITY: Desambiguador de aplicación de precios. Si dos tarifas coinciden en un rago de fechas se aplica la de mayor prioridad (mayor valor numérico).
+PRICE: precio final de venta.
+CURR: iso de la moneda.
+ 
+Se pide:
+ 
+Construir una aplicación/servicio en SpringBoot que provea una end point rest de consulta  tal que:
+ 
+Acepte como parámetros de entrada: fecha de aplicación, identificador de producto, identificador de cadena.
+Devuelva como datos de salida: identificador de producto, identificador de cadena, tarifa a aplicar, fechas de aplicación y precio final a aplicar.
+ 
+Se debe utilizar una base de datos en memoria (tipo h2) e inicializar con los datos del ejemplo, (se pueden cambiar el nombre de los campos y añadir otros nuevos si se quiere, elegir el tipo de dato que se considere adecuado para los mismos).
+              
+Desarrollar unos test al endpoint rest que  validen las siguientes peticiones al servicio con los datos del ejemplo:
+                                                                                       
+-          Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 2: petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+-          Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA)
+-          Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA)
+ 
+ 
+Se valorará:
+ 
+Diseño y construcción del servicio.
+Calidad de Código.
+Resultados correctos en los test.
+
+
+
+Teniendo en cuenta esto, quiero que hagas lo siguiente:
+
+ROLE
+
+Act as a Senior Java Backend Developer and Software Architect specialized in Spring Boot, Domain-Driven Design (DDD), Hexagonal Architecture (Ports & Adapters), REST APIs, clean code and automated testing.
+
+Your task is to design and implement a complete, production-quality Spring Boot application based on the following technical challenge.
+
+Do not generate a simplistic CRUD application. The solution must demonstrate good software architecture, separation of concerns, maintainability, testability and professional coding standards.
+
+1. TECHNOLOGY STACK
+
+Use the following technologies:
+
+Java 21.
+Spring Boot 3.x (latest stable compatible version).
+Maven.
+Spring Web.
+Spring Data JPA.
+H2 in-memory database.
+Bean Validation.
+Lombok only if it genuinely improves readability.
+JUnit 5.
+Mockito.
+Spring Boot Test.
+MockMvc.
+JaCoCo for test coverage.
+Spring Boot Actuator (health endpoint).
+SLF4J / Logback for logging.
+Springdoc OpenAPI / Swagger UI.
+
+Use compatible and stable dependency versions.
+
+2. BUSINESS REQUIREMENTS
+
+The application must expose a REST API to retrieve the applicable product price at a given date and time.
+
+The system manages price lists with the following information:
+
+BRAND_ID: Brand identifier.
+START_DATE: Price validity start date.
+END_DATE: Price validity end date.
+PRICE_LIST: Price list identifier.
+PRODUCT_ID: Product identifier.
+PRIORITY: Priority used to resolve overlapping prices.
+PRICE: Final product price.
+CURR: Currency (ISO code).
+
+Business rules:
+
+The API must receive:
+Application date and time.
+Product identifier.
+Brand identifier.
+The application must return the applicable price for the requested product, brand and date.
+A price is applicable when:
+
+START_DATE <= applicationDate <= END_DATE
+
+If multiple prices are applicable at the same time, select the one with the highest PRIORITY.
+If there are no applicable prices, return an appropriate HTTP 404 response.
+The price returned must include all relevant information:
+Product ID.
+Brand ID.
+Price list ID.
+Start date.
+End date.
+Final price.
+Currency.
+Use BigDecimal for monetary values.
+Use LocalDateTime for date ranges.
+Use ISO-4217 currency codes.
+3. INITIAL DATABASE DATA
+
+Configure H2 as an in-memory database and initialize it automatically when the application starts.
+
+Insert the following records:
+
+BRAND_ID	START_DATE	END_DATE	PRICE_LIST	PRODUCT_ID	PRIORITY	PRICE	CURR
+1	2020-06-14 00:00:00	2020-12-31 23:59:59	1	35455	0	35.50	EUR
+1	2020-06-14 15:00:00	2020-06-14 18:30:00	2	35455	1	25.45	EUR
+1	2020-06-15 00:00:00	2020-06-15 11:00:00	3	35455	1	30.50	EUR
+1	2020-06-15 16:00:00	2020-12-31 23:59:59	4	35455	1	38.95	EUR
+
+Use schema.sql and data.sql, or an equivalent clean database initialization strategy.
+
+4. HEXAGONAL ARCHITECTURE + DDD
+
+Implement a proper Hexagonal Architecture with clear separation between:
+
+Domain.
+Application.
+Infrastructure.
+
+Use the following suggested package structure:
+
+com.company.prices
+
+domain
+    model
+        Price.java
+    exception
+        PriceNotFoundException.java
+    repository
+        PriceRepository.java
+
+application
+    port
+        input
+            GetApplicablePriceUseCase.java
+        output
+            LoadPricesPort.java
+    service
+        GetApplicablePriceService.java
+
+infrastructure
+    adapter
+        input
+            rest
+                PriceController.java
+                dto
+                    PriceResponse.java
+                    ErrorResponse.java
+                mapper
+                    PriceResponseMapper.java
+        output
+            persistence
+                PriceJpaEntity.java
+                SpringDataPriceRepository.java
+                PricePersistenceAdapter.java
+                PricePersistenceMapper.java
+    configuration
+        BeanConfiguration.java
+        OpenApiConfiguration.java
+    exception
+        GlobalExceptionHandler.java
+
+
+Follow these architectural rules:
+
+Domain must not depend on Spring.
+Domain must not depend on JPA.
+Application layer must orchestrate business use cases.
+Infrastructure must implement the input and output adapters.
+Controllers must not contain business logic.
+Persistence entities must not be exposed through REST endpoints.
+Use dependency inversion through interfaces and ports.
+Keep mappings between domain, persistence and REST DTOs explicit.
+
+You can adjust the package structure if you identify a better architectural organization, but preserve the separation of responsibilities.
+
+5. REST API
+
+Implement the following endpoint:
+
+GET /api/v1/prices
+
+Query parameters:
+
+applicationDate: ISO-8601 date-time.
+productId: Long.
+brandId: Long.
+
+Example:
+
+GET /api/v1/prices?applicationDate=2020-06-14T16:00:00&productId=35455&brandId=1
+
+Expected response:
+
+{ "productId": 35455, "brandId": 1, "priceList": 2, "startDate": "2020-06-14T15:00:00", "endDate": "2020-06-14T18:30:00", "price": 25.45, "currency": "EUR" }
+
+Requirements:
+
+Follow REST conventions.
+Validate incoming parameters.
+Return HTTP 200 when a price is found.
+Return HTTP 400 for invalid requests.
+Return HTTP 404 when no applicable price exists.
+Return HTTP 500 for unexpected internal errors.
+Use a consistent JSON error response.
+Add Swagger/OpenAPI documentation.
+6. BUSINESS LOGIC
+
+Implement the price selection logic in the application/domain layer.
+
+The repository must retrieve prices matching:
+
+Product ID.
+Brand ID.
+Application date within the validity interval.
+
+When multiple records match, select the record with the highest priority.
+
+If two records have the same priority, implement a deterministic tie-breaking strategy and document it.
+
+Do not place this logic in the REST controller.
+
+7. TESTING REQUIREMENTS
+
+Implement unit tests and integration tests.
+
+Unit tests
+
+Test at least:
+
+Applicable price selection.
+Highest priority selection.
+No applicable price.
+Multiple overlapping price records.
+Boundary dates (START_DATE and END_DATE).
+Same-priority tie-breaking.
+Invalid input handling where appropriate.
+
+Use Mockito for application service unit tests.
+
+Integration tests
+
+Use @SpringBootTest and MockMvc.
+
+Test the actual REST endpoint using the initialized H2 database.
+
+Implement the following five mandatory test cases:
+
+TEST 1: Application date: 2020-06-14T10:00:00 Product ID: 35455 Brand ID: 1 Expected price: 35.50 Expected price list: 1
+
+TEST 2: Application date: 2020-06-14T16:00:00 Product ID: 35455 Brand ID: 1 Expected price: 25.45 Expected price list: 2
+
+TEST 3: Application date: 2020-06-14T21:00:00 Product ID: 35455 Brand ID: 1 Expected price: 35.50 Expected price list: 1
+
+TEST 4: Application date: 2020-06-15T10:00:00 Product ID: 35455 Brand ID: 1 Expected price: 30.50 Expected price list: 3
+
+TEST 5: Application date: 2020-06-16T21:00:00 Product ID: 35455 Brand ID: 1 Expected price: 38.95 Expected price list: 4
+
+For every integration test, validate:
+
+HTTP status.
+Product ID.
+Brand ID.
+Price list.
+Start date.
+End date.
+Price.
+Currency.
+
+Also add integration tests for:
+
+Product without applicable prices.
+Invalid date format.
+Missing query parameters.
+Invalid product and brand identifiers.
+
+Ensure tests are independent and reproducible.
+
+8. LOGGING
+
+Implement structured and useful application logging using SLF4J.
+
+Log relevant events:
+
+Incoming price lookup requests.
+Price lookup parameters.
+Successful price resolution.
+No applicable price found.
+Unexpected application errors.
+
+Avoid logging sensitive information.
+
+Do not use System.out.println.
+
+9. EXCEPTION HANDLING
+
+Implement centralized exception handling using @RestControllerAdvice.
+
+Create custom exceptions where appropriate.
+
+Return a consistent error structure, for example:
+
+{ "timestamp": "2020-06-14T16:00:00", "status": 404, "error": "Not Found", "message": "No applicable price found", "path": "/api/v1/prices" }
+
+Do not expose internal stack traces or sensitive technical information in API responses.
+
+10. DOCUMENTATION
+
+Create a complete README.md including:
+
+Project overview.
+Architecture explanation.
+Technology stack.
+Package structure.
+Business rules.
+Database initialization.
+How to run the application.
+How to execute tests.
+API endpoint documentation.
+Example requests and responses.
+Swagger UI URL.
+H2 console configuration.
+
+All source code, class names, methods, variable names, logs and technical documentation must be written in English.
+
+README can be written in Spanish if necessary.
+
+11. POSTMAN COLLECTION
+
+Generate an importable Postman collection under:
+
+postman/prices-api.postman_collection.json
+
+Include requests for:
+
+Test 1.
+Test 2.
+Test 3.
+Test 4.
+Test 5.
+No applicable price.
+Invalid date.
+Missing parameters.
+
+Configure a collection variable:
+
+baseUrl = http://localhost:8080
+
+12. CONFIGURATION
+
+Create application.yml with appropriate configuration.
+
+Requirements:
+
+H2 in-memory database.
+Hibernate validation of schema.
+SQL initialization.
+Proper logging levels.
+Actuator health endpoint.
+Swagger configuration.
+
+The application must start without requiring manual database setup or external services.
+
+13. QUALITY REQUIREMENTS
+
+Apply the following practices:
+
+SOLID principles.
+Clean Code.
+Meaningful class and method names.
+Small and focused classes.
+Constructor injection.
+Immutable domain objects where practical.
+No unnecessary abstractions.
+No business logic inside controllers.
+No duplicated logic.
+No magic values.
+Proper separation of concerns.
+
+Use BigDecimal instead of double or float for prices.
+
+14. DELIVERABLES
+
+Generate the complete project, including:
+
+Maven pom.xml.
+Complete package structure.
+Domain model.
+Application use case and service.
+Input and output ports.
+REST controller.
+DTOs and mappers.
+JPA entity and repository adapter.
+H2 configuration.
+Database initialization scripts.
+Global exception handler.
+Logging configuration.
+Unit tests.
+Integration tests.
+Postman collection.
+README.md.
+Swagger/OpenAPI configuration.
+15. EXECUTION AND VALIDATION
+
+After generating the project:
+
+Run Maven compilation.
+Execute all unit tests.
+Execute all integration tests.
+Fix any compilation or test failures.
+Execute mvn clean verify.
+Verify that the Spring Boot application starts correctly.
+Verify that the H2 database is initialized with all four records.
+Verify that the Postman collection contains valid requests.
+
+Do not claim that something works unless you have actually verified it.
+
+If any requirement cannot be completed, explain exactly what is missing.
+
+Start by creating the complete project structure and implementing the application. Do not stop after generating a plan or describing the architecture.

@@ -1,0 +1,255 @@
+﻿{
+    "info":  {
+                 "name":  "Prices API",
+                 "description":  "Requests for GET /api/v1/prices",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "http://localhost:8080"
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "Test 1 - 2020-06-14T10:00:00 (expects price list 1, 35.50)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-14T10:00:00\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-14T10:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Test 2 - 2020-06-14T16:00:00 (expects price list 2, 25.45)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-14T16:00:00\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-14T16:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Test 3 - 2020-06-14T21:00:00 (expects price list 1, 35.50)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-14T21:00:00\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-14T21:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Test 4 - 2020-06-15T10:00:00 (expects price list 3, 30.50)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-15T10:00:00\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-15T10:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Test 5 - 2020-06-16T21:00:00 (expects price list 4, 38.95)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-16T21:00:00\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-16T21:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "No applicable price (404)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=2020-06-14T10:00:00\u0026productId=99999\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "2020-06-14T10:00:00"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "99999"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Invalid date (400)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?applicationDate=not-a-date\u0026productId=35455\u0026brandId=1",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "applicationDate",
+                                                                   "value":  "not-a-date"
+                                                               },
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               },
+                                                               {
+                                                                   "key":  "brandId",
+                                                                   "value":  "1"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 },
+                 {
+                     "name":  "Missing parameters (400)",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  {
+                                                 "raw":  "{{baseUrl}}/api/v1/prices?productId=35455",
+                                                 "host":  [
+                                                              "{{baseUrl}}"
+                                                          ],
+                                                 "path":  [
+                                                              "api",
+                                                              "v1",
+                                                              "prices"
+                                                          ],
+                                                 "query":  [
+                                                               {
+                                                                   "key":  "productId",
+                                                                   "value":  "35455"
+                                                               }
+                                                           ]
+                                             }
+                                 }
+                 }
+             ]
+}
